@@ -112,12 +112,12 @@ def login(request):
                 print('query->',query)
                 # next=/cart/checkout/
                 params = dict(x.split('=') for x in query.split('&'))
-                # if 'next' in params:
-                #     nextPage = params['next']
-                #     return redirect(nextPage)
-                return redirect('dashboard')
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
+                
             except:
-                pass
+                return redirect('dashboard')
             
         else:
             messages.success(request, 'Invalid Credential.')
